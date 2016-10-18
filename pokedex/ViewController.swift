@@ -8,18 +8,55 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,
+UICollectionViewDelegateFlowLayout{
 
+    @IBOutlet weak var collection: UICollectionView!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        collection.delegate = self          // conform to the protocol
+        collection.dataSource = self
+       
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PokeCell", for: indexPath) as? PokeCell {
+            // indexPath - index of the row -> grab it and cast as PokeCell!
+            
+           let pokemon = Pokemon(name: "test", pokedexId: indexPath.row)
+            cell.configureCell(pokemon: pokemon)
+            
+            return cell
+        } else {
+            return UICollectionViewCell()  // return generic one with nothing in it!, if fails of course
+        }
     }
-
-
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 717
+    }
+    
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+ 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    
+        return CGSize(width: 105, height: 105)      // size of the grid!
+    }
+    
+    
+    
+    
+    
+    
 }
 
