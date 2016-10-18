@@ -64,6 +64,7 @@
                                         <constraints>
                                             <constraint firstItem="Oy0-2H-II5" firstAttribute="leading" secondItem="nig-qa-sfK" secondAttribute="leading" id="JmS-Jb-Vn5"/>
                                             <constraint firstAttribute="bottom" secondItem="bUd-XS-9OY" secondAttribute="bottom" id="Kxa-2A-28P"/>
+                                            <constraint firstItem="Oy0-2H-II5" firstAttribute="top" secondItem="nig-qa-sfK" secondAttribute="top" constant="84" id="NSH-hb-Zl7"/>
                                             <constraint firstAttribute="trailing" secondItem="Oy0-2H-II5" secondAttribute="trailing" id="SaL-s0-nAt"/>
                                             <constraint firstAttribute="bottom" secondItem="Oy0-2H-II5" secondAttribute="bottom" id="YCI-ph-Oe5"/>
                                             <constraint firstItem="bUd-XS-9OY" firstAttribute="top" secondItem="nig-qa-sfK" secondAttribute="top" id="ZF3-HY-Pt9"/>
