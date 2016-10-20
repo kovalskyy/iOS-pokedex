@@ -10,18 +10,24 @@ import UIKit
 import AVFoundation
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,
-UICollectionViewDelegateFlowLayout{
+UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
 
     @IBOutlet weak var collection: UICollectionView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var musicPlayer: AVAudioPlayer!
     var pokemon = [Pokemon]()
+    var filteredPokemon = [Pokemon]()
+    var inSearchMode = false
    
     override func viewDidLoad() {
         super.viewDidLoad()
         collection.delegate = self          // conform to the protocol
         collection.dataSource = self
-       
+        searchBar.delegate = self
+        searchBar.returnKeyType = UIReturnKeyType.done
+        searchBar.enablesReturnKeyAutomatically = false 
+        
         initAudio()
         parsePokemonCSV()                   //  when it;s called viedidLoad it will do the parsing
         
@@ -70,10 +76,18 @@ UICollectionViewDelegateFlowLayout{
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PokeCell", for: indexPath) as? PokeCell {
             // indexPath - index of the row -> grab it and cast as PokeCell!
             
-            var poke = pokemon[indexPath.row]
-            cell.configureCell(pokemon: poke)
+            let poke: Pokemon!
             
+            if inSearchMode {
+                poke = filteredPokemon[indexPath.row]
+            } else {
+                poke = pokemon[indexPath.row]
+            }
+            
+            
+            cell.configureCell(pokemon: poke)
             return cell
+            
         } else {
             return UICollectionViewCell()  // return generic one with nothing in it!, if fails of course
         }
@@ -85,7 +99,11 @@ UICollectionViewDelegateFlowLayout{
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 717
+        if inSearchMode {
+            return filteredPokemon.count
+        }                               // if we are not in searchmode return the regular number of Pokemon
+        
+        return pokemon.count
     }
     
     
@@ -112,6 +130,28 @@ UICollectionViewDelegateFlowLayout{
     
     }
     
+    func searchBarResultsListButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
+        
+    }
+    
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == nil || searchBar.text == "" {
+            inSearchMode = false
+            view.endEditing(true)               // close the keyboard
+                                    // refresh view of data
+        } else {
+            inSearchMode = true                 // filtering the pokemon 
+            let lower = searchBar.text!.lowercased()      // grab the word from textfield, assign lowerCase
+                                                    // $0 - grab first object(zero - variable) and grab a name property
+                                                    // a range is looking or a string similar to what u typed
+                                                    // if it's not nil it will add this name to our filter
+            filteredPokemon = pokemon.filter({$0.name.range(of: lower) != nil})
+            collection.reloadData()         // refresh and grab current data from data source
+        }
+    }
     
     
     
