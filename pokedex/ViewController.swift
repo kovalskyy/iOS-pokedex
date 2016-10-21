@@ -19,6 +19,9 @@ UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     var pokemon = [Pokemon]()
     var filteredPokemon = [Pokemon]()
     var inSearchMode = false
+    
+    
+    
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +29,20 @@ UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
         collection.dataSource = self
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
-        searchBar.enablesReturnKeyAutomatically = false 
+        searchBar.enablesReturnKeyAutomatically = false
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.keyboardOff))
+        view.addGestureRecognizer(tap)
         
         initAudio()
         parsePokemonCSV()                   //  when it;s called viedidLoad it will do the parsing
         
     }
+    
+    func keyboardOff() {
+        view.endEditing(true)
+    }
+    
     
     func initAudio() {
         let path = Bundle.main.path(forResource: "music", ofType: "mp3")!
@@ -46,7 +57,9 @@ UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
                 print(err.debugDescription)
 
         }
-    
+        
+       
+
     
     }
     
@@ -141,7 +154,7 @@ UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
         if searchBar.text == nil || searchBar.text == "" {
             inSearchMode = false
             view.endEditing(true)               // close the keyboard
-                                    // refresh view of data
+             collection.reloadData()                       // refresh view of data
         } else {
             inSearchMode = true                 // filtering the pokemon 
             let lower = searchBar.text!.lowercased()      // grab the word from textfield, assign lowerCase
