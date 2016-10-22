@@ -30,6 +30,7 @@ UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
         searchBar.enablesReturnKeyAutomatically = false
+        
 
         
         initAudio()
@@ -57,6 +58,18 @@ UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
 
     }
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
+        searchBar.showsCancelButton = false
+    }
+    
+
     
     func parsePokemonCSV() {                // parsing a CSV file, grab the data from this file and parse it
         let path = Bundle.main.path(forResource: "pokemon", ofType: "csv")!
