@@ -30,18 +30,14 @@ UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
         searchBar.enablesReturnKeyAutomatically = false
-        
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.keyboardOff))
-        view.addGestureRecognizer(tap)
+
         
         initAudio()
         parsePokemonCSV()                   //  when it;s called viedidLoad it will do the parsing
         
     }
     
-    func keyboardOff() {
-        view.endEditing(true)
-    }
+    
     
     
     func initAudio() {
@@ -58,10 +54,9 @@ UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
 
         }
         
-       
 
-    
     }
+    
     
     func parsePokemonCSV() {                // parsing a CSV file, grab the data from this file and parse it
         let path = Bundle.main.path(forResource: "pokemon", ofType: "csv")!
@@ -109,6 +104,17 @@ UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        let poke: Pokemon!
+        
+        if inSearchMode {
+            poke = filteredPokemon[indexPath.row]
+        } else {
+            poke = pokemon[indexPath.row]
+        }
+        
+        print(poke.name)
+        performSegue(withIdentifier: "PokemonDetailVC", sender: poke)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -119,6 +125,7 @@ UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
         return pokemon.count
     }
     
+
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -166,7 +173,15 @@ UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
         }
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PokemonDetailVC" {
+            if let detailsVC = segue.destination as? PokemonDetailVC {
+                if let poke = sender as? Pokemon {      // because of perfromsegue!
+                    detailsVC.pokemon = poke
+                }
+            }
+        }
+    }
     
     
 }
