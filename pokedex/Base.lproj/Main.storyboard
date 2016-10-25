@@ -171,6 +171,9 @@
                                             <constraint firstAttribute="width" constant="34" id="TDT-TK-Ytg"/>
                                         </constraints>
                                         <state key="normal" image="back"/>
+                                        <connections>
+                                            <action selector="backBtnPressed:" destination="JLU-ns-z3A" eventType="touchUpInside" id="bvs-ff-wMG"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.34509803919999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -307,6 +310,10 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="2VJ-JJ-1v4" firstAttribute="top" secondItem="rEP-Fq-YHQ" secondAttribute="bottom" id="ISe-o5-vhX"/>
+                                    <constraint firstItem="2VJ-JJ-1v4" firstAttribute="top" secondItem="rEP-Fq-YHQ" secondAttribute="bottom" constant="5" id="VDM-DM-kbr"/>
+                                </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pvr-56-Ybw">
                                 <frame key="frameInset" minY="460" width="375" height="30"/>
@@ -365,7 +372,18 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="baseAttackLbl" destination="Xut-Te-sGZ" id="dlY-hl-VWK"/>
+                        <outlet property="currentEvoImg" destination="6to-QS-tWK" id="Y7Y-Bn-9vg"/>
+                        <outlet property="defenseLbl" destination="Y0Z-EC-nnL" id="Cdl-a6-w5D"/>
+                        <outlet property="descLbl" destination="Mc2-4r-upi" id="z01-9a-0Ex"/>
+                        <outlet property="evoLbl" destination="IrH-pU-gxU" id="Dwy-jf-eMU"/>
+                        <outlet property="heightLbl" destination="4MA-eW-M9P" id="4wW-Vs-hf1"/>
+                        <outlet property="mainImg" destination="WTf-ge-sRe" id="cV9-L8-BgZ"/>
                         <outlet property="nameLbl" destination="oZ8-qH-Vmk" id="qbH-sO-7vl"/>
+                        <outlet property="nextEvoImg" destination="Wg2-A8-B1m" id="Nr3-wz-Uji"/>
+                        <outlet property="pokedexIdLbl" destination="J95-Qv-fEw" id="7rV-cx-t94"/>
+                        <outlet property="typeLbl" destination="c5a-8U-aA5" id="aBJ-Hy-4hp"/>
+                        <outlet property="weightLbl" destination="der-Ta-b4c" id="GUE-go-6lC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="heX-yT-Bme" userLabel="First Responder" sceneMemberID="firstResponder"/>
