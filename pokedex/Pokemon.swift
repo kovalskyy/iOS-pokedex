@@ -20,6 +20,8 @@ class Pokemon {
     private var _weight: String!
     private var attack: String!
     private var _nextEvolutionTxt: String!
+    private var _nextEvolutionId: String!
+    private var _nextEvolutionLvl: String!
     private var _pokemonUrl: String!
     
     var name: String {
@@ -89,8 +91,63 @@ class Pokemon {
                 
                 print(self._type)
                 
+                // Descriptions
+                if let descArr = dict["descriptions"] as? [Dictionary<String, String>] , descArr.count > 0 {
+                    if let url = descArr[0]["resource_uri"] {
+                        let descURL = "\(URL_BASE)\(url)"
+                        
+                        Alamofire.request(descURL).responseJSON(completionHandler: { response in
+                            
+                            if let descDict = response.result.value as? [String: AnyObject] {
+                                
+                                if let description = descDict["description"] as? String {
+                                 let newDesc = description.replacingOccurrences(of: "POKMON", with: "Pokemon") // some bug in API data!
+                                    self._description = newDesc
+                                    print(self._description)
+                                }
+                            }
+                            
+                            _completed()
+                        })
+                    }
+                
+                } else {
+                    self._description = ""
+                    _completed()
+                }
+            
+                if let evolutions = dict["evolutions"] as? [Dictionary<String, AnyObject>] , evolutions.count > 0 {
+                    
+                    if let to = evolutions[0]["to"] as? String {                       // "to" is a name of nextEVo
+                        
+                        if to.range(of: "mega") == nil {            // Cant support mega pokemon right now
+                            
+                                                                    // extract pokemonId from the uri
+                            if let uri = evolutions[0]["resource_uri"] as? String {
+                                
+                                let newStr = uri.replacingOccurrences(of: "api/v1/pokemon", with: "") // getting rid of "of" and place with empty Str
+                                let nextEvoId = newStr.replacingOccurrences(of: "/", with: "")
+                                
+                                self._nextEvolutionId = nextEvoId
+                                self._nextEvolutionTxt = to
+                                
+                                if let lvl = evolutions[0]["level"] as? Int {
+                                    self._nextEvolutionLvl = "\(lvl)"       // convert to a string
+                                }
+                                print(self._nextEvolutionId)
+                                print(self._nextEvolutionTxt)
+                                print(self._nextEvolutionLvl)
+                                
+                            } else {
+                                self._nextEvolutionLvl = ""
+                            }
+                        }
+                    
+                    }
+                    
+                }
+                
             }
-
     
             }
 
