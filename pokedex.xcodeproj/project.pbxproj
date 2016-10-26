@@ -77,11 +77,11 @@
 		230A2A1B1DB53FFA0003438D /* pokedex */ = {
 			isa = PBXGroup;
 			children = (
-				23EA0D721DB65A0300F657CB /* Resources */,
-				23EA0D711DB651EB00F657CB /* Utility */,
-				23EA0D701DB651DF00F657CB /* Controller */,
 				230A2A301DB5685C0003438D /* Model */,
 				23EA0D6A1DB6424000F657CB /* View */,
+				23EA0D711DB651EB00F657CB /* Utility */,
+				23EA0D701DB651DF00F657CB /* Controller */,
+				23EA0D721DB65A0300F657CB /* Resources */,
 				230A2A1C1DB53FFA0003438D /* AppDelegate.swift */,
 				230A2A201DB53FFA0003438D /* Main.storyboard */,
 				230A2A231DB53FFA0003438D /* Assets.xcassets */,

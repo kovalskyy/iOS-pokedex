@@ -24,6 +24,67 @@ class Pokemon {
     private var _nextEvolutionLvl: String!
     private var _pokemonUrl: String!
     
+    var description: String {            // prevent from CRASHES!!!
+        if _description == nil {
+            _description = ""
+        }
+        return _description
+    }
+    
+    var type: String {
+        if _type == nil {
+            _type = ""
+        }
+        return _type
+    }
+    
+    var defense: String {
+        if _defense == nil {
+            _defense = ""
+        }
+         return _defense
+    }
+    
+    var height: String {
+        if _height == nil {
+           _height = ""
+        }
+        return _height
+    }
+    var weight: String {
+        if _weight == nil {
+            _weight = ""
+        }
+        return _weight
+    }
+    
+    var attackk: String {
+        if attack == nil {
+            attack = ""
+        }
+        return attack
+    }
+    
+    var nextEvoTxt: String {
+        if _nextEvolutionTxt == nil {
+            _nextEvolutionTxt = ""
+        }
+        return _nextEvolutionTxt
+    }
+    
+    var nextEvoId: String {
+        if _nextEvolutionId == nil {
+            _nextEvolutionId = ""
+        }
+        return _nextEvolutionId
+     }
+   
+    var nextEvoLvl: String {
+        if _nextEvolutionLvl == nil {
+            _nextEvolutionLvl = ""
+        }
+        return _nextEvolutionLvl
+    }
     var name: String {
         return _name
     }
@@ -31,6 +92,7 @@ class Pokemon {
     var pokedexId: Int {
         return _pokedexId
     }
+    
     
     init(name: String, pokedexId: Int) { // PASS that Data in !
         self._name = name
@@ -66,10 +128,10 @@ class Pokemon {
                     self._defense = "\(defense)"
                 }
                 
-                print(self._weight)
-                print(self._height)
-                print(self.attack)
-                print(self._defense)
+               // print(self._weight)
+               // print(self._height)
+               // print(self.attack)
+               // print(self._defense)
                 
                 if let types = dict["types"] as?  [Dictionary<String, String>] , types.count > 0  {     // an array of dictionairies
                     if let name = types[0]["name"] {        // calling a dictionairy and grabing name property from it
@@ -89,7 +151,7 @@ class Pokemon {
                     
                 }
                 
-                print(self._type)
+               // print(self._type)
                 
                 // Descriptions
                 if let descArr = dict["descriptions"] as? [Dictionary<String, String>] , descArr.count > 0 {
@@ -103,7 +165,7 @@ class Pokemon {
                                 if let description = descDict["description"] as? String {
                                  let newDesc = description.replacingOccurrences(of: "POKMON", with: "Pokemon") // some bug in API data!
                                     self._description = newDesc
-                                    print(self._description)
+                                   // print(self._description)
                                 }
                             }
                             
@@ -115,7 +177,7 @@ class Pokemon {
                     self._description = ""
                     _completed()
                 }
-            
+                // Evolutions
                 if let evolutions = dict["evolutions"] as? [Dictionary<String, AnyObject>] , evolutions.count > 0 {
                     
                     if let to = evolutions[0]["to"] as? String {                       // "to" is a name of nextEVo
@@ -134,9 +196,9 @@ class Pokemon {
                                 if let lvl = evolutions[0]["level"] as? Int {
                                     self._nextEvolutionLvl = "\(lvl)"       // convert to a string
                                 }
-                                print(self._nextEvolutionId)
-                                print(self._nextEvolutionTxt)
-                                print(self._nextEvolutionLvl)
+                               // print(self._nextEvolutionId)
+                               // print(self._nextEvolutionTxt)
+                               // print(self._nextEvolutionLvl)
                                 
                             } else {
                                 self._nextEvolutionLvl = ""

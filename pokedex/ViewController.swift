@@ -19,10 +19,7 @@ UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     var pokemon = [Pokemon]()
     var filteredPokemon = [Pokemon]()
     var inSearchMode = false
-    
-    
-    
-   
+
     override func viewDidLoad() {
         super.viewDidLoad()
         collection.delegate = self          // conform to the protocol
@@ -30,16 +27,11 @@ UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
         searchBar.enablesReturnKeyAutomatically = false
-        
 
-        
         initAudio()
         parsePokemonCSV()                   //  when it;s called viedidLoad it will do the parsing
         
     }
-    
-    
-    
     
     func initAudio() {
         let path = Bundle.main.path(forResource: "music", ofType: "mp3")!
@@ -69,7 +61,6 @@ UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
         searchBar.showsCancelButton = false
     }
     
-
     
     func parsePokemonCSV() {                // parsing a CSV file, grab the data from this file and parse it
         let path = Bundle.main.path(forResource: "pokemon", ofType: "csv")!
@@ -145,8 +136,8 @@ UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     }
  
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    
-        return CGSize(width: 105, height: 105)      // size of the grid!
+        let size = view.bounds.width / 3 - 20
+        return CGSize(width: size, height: size)      // size of the grid!
     }
     
     
