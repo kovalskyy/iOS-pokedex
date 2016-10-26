@@ -10,7 +10,9 @@ import UIKit
 
 class PokemonDetailVC: UIViewController {
 
+    
     var pokemon: Pokemon!
+    
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var mainImg: UIImageView!
     @IBOutlet weak var descLbl: UILabel!
@@ -25,20 +27,40 @@ class PokemonDetailVC: UIViewController {
     @IBOutlet weak var evoLbl: UILabel!
     
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
         nameLbl.text = pokemon.name.capitalized
         let img = UIImage(named: "\(pokemon.pokedexId)")
         mainImg.image = img
         currentEvoImg.image = img
+        hideTestDataOnLoad()
+        
         
         pokemon.downloadPokemonDetails { () -> () in
             // this will be called after download its done
             // here we will update our UI 
             self.updateUI()         // inside closure, needed self. key word!
+            self.activityIndicator.stopAnimating()
+            
         }
+        
+    }
+    
+    func hideTestDataOnLoad() {
+        descLbl.text = ""
+        heightLbl.text = ""
+        weightLbl.text = ""
+        baseAttackLbl.text = ""
+        defenseLbl.text = ""
+        typeLbl.text = ""
+        evoLbl.text = ""
+        pokedexIdLbl.text = ""
+        nextEvoImg.image = nil
+        
         
     }
     

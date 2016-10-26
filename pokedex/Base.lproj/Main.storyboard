@@ -343,13 +343,18 @@
                                     </imageView>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="SwQ-Pk-koz">
+                                <frame key="frameInset" minX="1" minY="307" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="SwQ-Pk-koz" firstAttribute="centerX" secondItem="mad-R2-rru" secondAttribute="centerX" id="Afq-Rs-3Z5"/>
                             <constraint firstItem="sap-mt-CDs" firstAttribute="top" secondItem="Pvr-56-Ybw" secondAttribute="bottom" constant="8" id="Aiz-zk-QEL"/>
                             <constraint firstItem="Pvr-56-Ybw" firstAttribute="leading" secondItem="mad-R2-rru" secondAttribute="leading" id="Dfq-0D-PLU"/>
                             <constraint firstAttribute="trailing" secondItem="JBF-6w-N3R" secondAttribute="trailing" id="Ecr-C8-1Ik"/>
                             <constraint firstItem="LIh-s6-eA6" firstAttribute="top" secondItem="JBF-6w-N3R" secondAttribute="bottom" constant="8" id="FBj-us-fGe"/>
+                            <constraint firstItem="SwQ-Pk-koz" firstAttribute="centerY" secondItem="mad-R2-rru" secondAttribute="centerY" id="IM5-E2-PtB"/>
                             <constraint firstAttribute="trailing" secondItem="LIh-s6-eA6" secondAttribute="trailing" constant="8" id="Ob8-LX-BaK"/>
                             <constraint firstItem="sap-mt-CDs" firstAttribute="leading" secondItem="mad-R2-rru" secondAttribute="leadingMargin" id="W9e-SU-yKh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sap-mt-CDs" secondAttribute="trailing" id="X1L-Uc-nHC"/>
@@ -362,6 +367,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="SwQ-Pk-koz" id="sMG-xq-uta"/>
                         <outlet property="baseAttackLbl" destination="Xut-Te-sGZ" id="dlY-hl-VWK"/>
                         <outlet property="currentEvoImg" destination="6to-QS-tWK" id="Y7Y-Bn-9vg"/>
                         <outlet property="defenseLbl" destination="Y0Z-EC-nnL" id="Cdl-a6-w5D"/>
