@@ -1,5 +1,6 @@
 # iOS-pokedex
 Pokemon archive
+
 Practiced: 
 - parsing CSV & JSON
 - implementing search filter
